@@ -1,1 +1,39 @@
+CREATE DATABASE IF NOT EXISTS rede_recomeco CHARACTER SET utf8mb4;
+USE rede_recomeco;
 
+CREATE TABLE Usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    perfil VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Doador (
+    id_doador INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE,
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE Familia (
+    id_familia INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    nome_responsavel VARCHAR(100) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    qtd_integrantes INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Doacao (
+    id_doacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_doador INT NOT NULL,
+    id_usuario INT NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    quantidade INT NOT NULL,
+    data_recebimento DATE NOT NULL,
+    observacao TEXT,
+    FOREIGN KEY (id_doador) REFERENCES Doador(id_doador),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
