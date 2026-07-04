@@ -37,3 +37,4 @@ CREATE TABLE Doacao (
     FOREIGN KEY (id_doador) REFERENCES Doador(id_doador),
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
+#
